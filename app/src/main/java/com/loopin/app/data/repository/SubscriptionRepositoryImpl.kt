@@ -27,6 +27,14 @@ class SubscriptionRepositoryImpl(
         return subscriptionDao.insert(subscription.toEntity())
     }
 
+    override suspend fun deleteSubscription(id: Long) {
+        subscriptionDao.deleteById(id)
+    }
+
+    override suspend fun deleteSubscriptionByName(name: String) {
+        subscriptionDao.deleteByNamePattern("%$name%")
+    }
+
     override suspend fun seedSampleData() {
         subscriptionDao.deleteAll()
         val sampleSubs = SampleDataProvider.getSampleSubscriptions()

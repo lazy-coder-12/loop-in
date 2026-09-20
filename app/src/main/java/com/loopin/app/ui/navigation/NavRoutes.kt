@@ -11,4 +11,13 @@ sealed class NavRoutes(val route: String) {
         const val ARG_SUBSCRIPTION_ID = "subscriptionId"
         fun createRoute(subscriptionId: Long): String = "subscription_detail/$subscriptionId"
     }
+    data object ServicePlans : NavRoutes("service_plans/{serviceId}") {
+        const val ARG_SERVICE_ID = "serviceId"
+        fun createRoute(serviceId: String): String = "service_plans/$serviceId"
+    }
+    data object PlanDetail : NavRoutes("plan_detail/{serviceId}/{planId}") {
+        const val ARG_SERVICE_ID = "serviceId"
+        const val ARG_PLAN_ID = "planId"
+        fun createRoute(serviceId: String, planId: String): String = "plan_detail/$serviceId/$planId"
+    }
 }

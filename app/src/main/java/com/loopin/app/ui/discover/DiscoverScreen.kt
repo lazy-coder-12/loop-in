@@ -93,6 +93,7 @@ fun DiscoverScreen(
     onNotificationsClick: () -> Unit = {},
     onSubscriptionClick: (Long) -> Unit = {},
     onServiceSelected: (DiscoverService) -> Unit = {},
+    onServiceClick: (serviceId: String) -> Unit = {},
     onTabSelected: (LoopInTab) -> Unit = {}
 ) {
     var searchQuery by remember { mutableStateOf("") }
@@ -218,13 +219,7 @@ fun DiscoverScreen(
                                 .weight(1f)
                                 .clip(RoundedCornerShape(20.dp))
                                 .clickable {
-                                    val subId = when (item.id) {
-                                        "netflix" -> 2L
-                                        "spotify" -> 3L
-                                        "gemini" -> 2L
-                                        else -> 2L
-                                    }
-                                    onSubscriptionClick(subId)
+                                    onServiceClick(item.id)
                                     onServiceSelected(
                                         DiscoverService(
                                             name = item.name,
@@ -280,12 +275,7 @@ fun DiscoverScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                val subId = when (app.id) {
-                                    "hotstar" -> 1L
-                                    "claude" -> 4L
-                                    else -> 2L
-                                }
-                                onSubscriptionClick(subId)
+                                onServiceClick(app.id)
                                 onServiceSelected(
                                     DiscoverService(
                                         name = app.name,

@@ -21,6 +21,12 @@ interface SubscriptionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(subscription: SubscriptionEntity): Long
 
+    @Query("DELETE FROM subscriptions WHERE id = :id")
+    suspend fun deleteById(id: Long)
+
+    @Query("DELETE FROM subscriptions WHERE LOWER(name) LIKE LOWER(:namePattern)")
+    suspend fun deleteByNamePattern(namePattern: String)
+
     @Query("DELETE FROM subscriptions")
     suspend fun deleteAll()
 

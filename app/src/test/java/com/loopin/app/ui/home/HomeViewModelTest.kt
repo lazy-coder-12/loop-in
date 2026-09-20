@@ -38,6 +38,14 @@ class FakeSubscriptionRepository : SubscriptionRepository {
         return subscription.id
     }
 
+    override suspend fun deleteSubscription(id: Long) {
+        _flow.value = _flow.value.filter { it.id != id }
+    }
+
+    override suspend fun deleteSubscriptionByName(name: String) {
+        _flow.value = _flow.value.filterNot { it.name.contains(name, ignoreCase = true) }
+    }
+
     override suspend fun seedSampleData() {
         _flow.value = SampleDataProvider.getSampleSubscriptions()
     }

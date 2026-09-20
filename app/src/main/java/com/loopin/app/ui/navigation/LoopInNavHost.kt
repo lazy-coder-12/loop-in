@@ -28,6 +28,8 @@ import com.loopin.app.di.AppContainer
 import com.loopin.app.ui.components.AddSubscriptionOverlay
 import com.loopin.app.ui.components.LoopInTab
 import com.loopin.app.ui.discover.DiscoverScreen
+import com.loopin.app.ui.discover.PlanDetailsScreen
+import com.loopin.app.ui.discover.ServicePlansScreen
 import com.loopin.app.ui.home.HomeScreen
 import com.loopin.app.ui.home.HomeViewModel
 import com.loopin.app.ui.notifications.NotificationsScreen
@@ -57,11 +59,7 @@ fun LoopInNavHost(
 
     fun navigateToNewSubscriptionDirectly() {
         navController.navigate(NavRoutes.NewSubscription.route) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
-            }
             launchSingleTop = true
-            restoreState = true
         }
     }
 
@@ -79,19 +77,32 @@ fun LoopInNavHost(
             LoopInTab.PROFILE -> NavRoutes.Profile.route
         }
 
+        val currentRoute = navController.currentDestination?.route
+
+        // Don't re-navigate if already on this route
+        if (currentRoute == targetRoute) {
+            return
+        }
+
+        // If user is inside nested ServicePlans or PlanDetail and taps Discover in bottom bar,
+        // pop back up to Discover.
+        if (tab == LoopInTab.DISCOVER && (currentRoute?.startsWith("service_plans") == true || currentRoute?.startsWith("plan_detail") == true)) {
+            navController.popBackStack(NavRoutes.Discover.route, inclusive = false)
+            return
+        }
+
         navController.navigate(targetRoute) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
-            }
             launchSingleTop = true
-            restoreState = true
         }
     }
 
     fun handleBackClick() {
         val popped = navController.popBackStack()
         if (!popped) {
-            navigateToTab(LoopInTab.HOME)
+            navController.navigate(NavRoutes.Home.route) {
+                popUpTo(0) { inclusive = true }
+                launchSingleTop = true
+            }
         }
     }
 
@@ -173,18 +184,8 @@ fun LoopInNavHost(
                     onNotificationsClick = {
                         navController.navigate(NavRoutes.Notifications.route)
                     },
-                    onSubscriptionClick = { id ->
-                        navController.navigate(NavRoutes.SubscriptionDetail.createRoute(id))
-                    },
-                    onServiceSelected = { service ->
-                        val id = when (service.name.lowercase()) {
-                            "netflix" -> 2L
-                            "spotify" -> 3L
-                            "jio hotstar", "disney + hotstar" -> 1L
-                            "claude ai", "claude pro" -> 4L
-                            else -> 2L
-                        }
-                        navController.navigate(NavRoutes.SubscriptionDetail.createRoute(id))
+                    onServiceClick = { serviceId ->
+                        navController.navigate(NavRoutes.ServicePlans.createRoute(serviceId))
                     },
                     onTabSelected = ::navigateToTab
                 )
@@ -310,6 +311,106 @@ fun LoopInNavHost(
                     subscriptionId = subscriptionId,
                     repository = appContainer.subscriptionRepository,
                     onBackClick = { handleBackClick() }
+                )
+            }
+
+            // Deeper screen: Service Plans (e.g. Netflix) moves in from bottom to top; pops down revealing screen beneath
+            composable(
+                route = NavRoutes.ServicePlans.route,
+                arguments = listOf(
+                    navArgument(NavRoutes.ServicePlans.ARG_SERVICE_ID) {
+                        type = NavType.StringType
+                    }
+                ),
+                enterTransition = {
+                    slideInVertically(
+                        initialOffsetY = { it },
+                        animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+                    )
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { -it },
+                        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                    )
+                },
+                popEnterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { -it },
+                        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                    )
+                },
+                popExitTransition = {
+                    slideOutVertically(
+                        targetOffsetY = { it },
+                        animationSpec = tween(durationMillis = 320, easing = FastOutSlowInEasing)
+                    )
+                }
+            ) { backStackEntry ->
+                val serviceId = backStackEntry.arguments?.getString(
+                    NavRoutes.ServicePlans.ARG_SERVICE_ID
+                ) ?: "netflix"
+
+                ServicePlansScreen(
+                    serviceId = serviceId,
+                    repository = appContainer.subscriptionRepository,
+                    onBackClick = { handleBackClick() },
+                    onPlanClick = { sId, planId ->
+                        navController.navigate(NavRoutes.PlanDetail.createRoute(sId, planId))
+                    },
+                    onTabSelected = ::navigateToTab
+                )
+            }
+
+            // Deeper screen: Plan Details slides in horizontally from right; pops out sliding to the right
+            composable(
+                route = NavRoutes.PlanDetail.route,
+                arguments = listOf(
+                    navArgument(NavRoutes.PlanDetail.ARG_SERVICE_ID) {
+                        type = NavType.StringType
+                    },
+                    navArgument(NavRoutes.PlanDetail.ARG_PLAN_ID) {
+                        type = NavType.StringType
+                    }
+                ),
+                enterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { it },
+                        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                    )
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { -it },
+                        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                    )
+                },
+                popEnterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { -it },
+                        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                    )
+                },
+                popExitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { it },
+                        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+                    )
+                }
+            ) { backStackEntry ->
+                val serviceId = backStackEntry.arguments?.getString(
+                    NavRoutes.PlanDetail.ARG_SERVICE_ID
+                ) ?: "netflix"
+                val planId = backStackEntry.arguments?.getString(
+                    NavRoutes.PlanDetail.ARG_PLAN_ID
+                ) ?: "mobile"
+
+                PlanDetailsScreen(
+                    serviceId = serviceId,
+                    planId = planId,
+                    repository = appContainer.subscriptionRepository,
+                    onBackClick = { handleBackClick() },
+                    onTabSelected = ::navigateToTab
                 )
             }
         }
