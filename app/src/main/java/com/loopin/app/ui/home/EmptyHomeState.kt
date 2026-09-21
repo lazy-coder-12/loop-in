@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.AutoAwesome
-import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -24,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
 import com.loopin.app.ui.theme.ElectricBlue
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.NeutralGray
 import com.loopin.app.ui.theme.PureWhite
 
@@ -55,7 +53,7 @@ fun EmptyHomeState(
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = Icons.Rounded.NotificationsActive,
+                painter = painterResource(FluentIcons.AlertFilled),
                 contentDescription = null,
                 tint = ElectricBlue,
                 modifier = Modifier.size(32.dp)
@@ -103,7 +101,7 @@ fun EmptyHomeState(
             )
         ) {
             Icon(
-                imageVector = Icons.Rounded.Add,
+                painter = painterResource(FluentIcons.Add),
                 contentDescription = null,
                 modifier = Modifier.size(18.dp)
             )
@@ -126,7 +124,7 @@ fun EmptyHomeState(
             shape = RoundedCornerShape(14.dp)
         ) {
             Icon(
-                imageVector = Icons.Rounded.AutoAwesome,
+                painter = painterResource(FluentIcons.Sparkle),
                 contentDescription = null,
                 tint = ElectricBlue,
                 modifier = Modifier.size(18.dp)

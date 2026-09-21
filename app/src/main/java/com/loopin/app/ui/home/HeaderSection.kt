@@ -16,9 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Notifications
-import androidx.compose.material.icons.rounded.Search
+import androidx.annotation.DrawableRes
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.loopin.app.R
 import com.loopin.app.ui.theme.AppFontFamily
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.PureWhite
 
 @Composable
@@ -98,13 +97,13 @@ fun HeaderSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             HeaderActionButton(
-                icon = Icons.Rounded.Search,
+                iconRes = FluentIcons.Search,
                 contentDescription = "Search",
                 onClick = onSearchClick
             )
             Spacer(modifier = Modifier.width(10.dp))
             HeaderActionButton(
-                icon = Icons.Rounded.Notifications,
+                iconRes = FluentIcons.Alert,
                 contentDescription = "Notifications",
                 onClick = onNotificationsClick
             )
@@ -114,7 +113,7 @@ fun HeaderSection(
 
 @Composable
 private fun HeaderActionButton(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    @DrawableRes iconRes: Int,
     contentDescription: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -136,10 +135,10 @@ private fun HeaderActionButton(
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = icon,
+                painter = painterResource(iconRes),
                 contentDescription = contentDescription,
                 tint = PureWhite,
-                modifier = Modifier.size(22.dp)
+                modifier = Modifier.size(20.dp)
             )
         }
     }

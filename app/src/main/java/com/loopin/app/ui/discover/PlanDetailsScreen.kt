@@ -22,12 +22,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBackIos
-import androidx.compose.material.icons.outlined.Flag
-import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -48,6 +42,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import com.loopin.app.ui.theme.FluentIcons
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -323,7 +319,7 @@ fun PlanDetailsContent(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                imageVector = Icons.Outlined.Language,
+                                painter = painterResource(FluentIcons.Globe),
                                 contentDescription = null,
                                 tint = Color(0xFF0070FF),
                                 modifier = Modifier.size(17.dp)
@@ -358,7 +354,7 @@ fun PlanDetailsContent(
                                     verticalAlignment = Alignment.Top
                                 ) {
                                     Icon(
-                                        imageVector = Icons.Rounded.Check,
+                                        painter = painterResource(FluentIcons.Checkmark),
                                         contentDescription = null,
                                         tint = DeepMidnight,
                                         modifier = Modifier
@@ -480,12 +476,10 @@ private fun PlanDetailsHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
+                    painter = painterResource(FluentIcons.Back),
                     contentDescription = "Back",
                     tint = DeepMidnight,
-                    modifier = Modifier
-                        .size(16.dp)
-                        .padding(start = 2.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -530,7 +524,7 @@ private fun PlanDetailsHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.MoreVert,
+                    painter = painterResource(FluentIcons.MoreVertical),
                     contentDescription = "More options",
                     tint = DeepMidnight,
                     modifier = Modifier.size(22.dp)
@@ -558,7 +552,7 @@ private fun PlanDetailsHeader(
                     },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Outlined.Flag,
+                            painter = painterResource(FluentIcons.Flag),
                             contentDescription = null,
                             tint = DeepMidnight,
                             modifier = Modifier.size(18.dp)

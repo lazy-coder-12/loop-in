@@ -17,15 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.CalendarMonth
-import androidx.compose.material.icons.rounded.Category
-import androidx.compose.material.icons.rounded.CreditCard
-import androidx.compose.material.icons.rounded.DeleteOutline
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.PauseCircleOutline
-import androidx.compose.material.icons.rounded.Security
+import androidx.annotation.DrawableRes
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -40,7 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,6 +52,7 @@ import com.loopin.app.ui.theme.BorderLight
 import com.loopin.app.ui.theme.DangerRed
 import com.loopin.app.ui.theme.DeepMidnight
 import com.loopin.app.ui.theme.ElectricBlue
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.LoopInTheme
 import com.loopin.app.ui.theme.NeutralGray
 import com.loopin.app.ui.theme.PureWhite
@@ -115,7 +108,7 @@ fun SubscriptionDetailContent(
                         .background(Color(0xFFF7F8FA))
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                        painter = painterResource(FluentIcons.Back),
                         contentDescription = "Back",
                         tint = DeepMidnight,
                         modifier = Modifier.size(20.dp)
@@ -215,21 +208,21 @@ fun SubscriptionDetailContent(
                     val dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
 
                     DetailRow(
-                        icon = Icons.Rounded.CreditCard,
+                        iconRes = FluentIcons.Payment,
                         label = "Amount",
                         value = "₹ " + IndianCurrencyFormatter.format(subscription.amountMinor).removePrefix("₹")
                     )
                     HorizontalDivider(color = BorderLight, thickness = 1.dp)
 
                     DetailRow(
-                        icon = Icons.Rounded.CalendarMonth,
+                        iconRes = FluentIcons.Calendar,
                         label = "Next Due Date",
                         value = subscription.nextDueDate.format(dateFormatter)
                     )
                     HorizontalDivider(color = BorderLight, thickness = 1.dp)
 
                     DetailRow(
-                        icon = Icons.Rounded.Category,
+                        iconRes = FluentIcons.Tag,
                         label = "Billing Cycle",
                         value = cadenceText
                     )
@@ -241,7 +234,7 @@ fun SubscriptionDetailContent(
                     }
 
                     DetailRow(
-                        icon = Icons.Rounded.Security,
+                        iconRes = FluentIcons.ShieldCheckmark,
                         label = "Detection Signal",
                         value = sourceText
                     )
@@ -259,7 +252,7 @@ fun SubscriptionDetailContent(
                 ) {
                     Row(verticalAlignment = Alignment.Top) {
                         Icon(
-                            imageVector = Icons.Rounded.Info,
+                            painter = painterResource(FluentIcons.Info),
                             contentDescription = null,
                             tint = ElectricBlue,
                             modifier = Modifier.size(20.dp)
@@ -287,7 +280,7 @@ fun SubscriptionDetailContent(
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = DeepMidnight)
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.PauseCircleOutline,
+                        painter = painterResource(FluentIcons.Pause),
                         contentDescription = null,
                         modifier = Modifier.size(18.dp)
                     )
@@ -311,7 +304,7 @@ fun SubscriptionDetailContent(
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = DangerRed)
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.DeleteOutline,
+                        painter = painterResource(FluentIcons.Delete),
                         contentDescription = null,
                         tint = DangerRed,
                         modifier = Modifier.size(18.dp)
@@ -334,7 +327,7 @@ fun SubscriptionDetailContent(
 
 @Composable
 private fun DetailRow(
-    icon: ImageVector,
+    @DrawableRes iconRes: Int,
     label: String,
     value: String
 ) {
@@ -347,7 +340,7 @@ private fun DetailRow(
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                imageVector = icon,
+                painter = painterResource(iconRes),
                 contentDescription = null,
                 tint = NeutralGray,
                 modifier = Modifier.size(18.dp)

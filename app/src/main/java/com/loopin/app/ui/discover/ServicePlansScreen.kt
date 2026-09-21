@@ -21,11 +21,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBackIos
-import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.outlined.Flag
-import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -65,6 +60,7 @@ import com.loopin.app.ui.components.LoopInTab
 import com.loopin.app.ui.components.ReportIssueOverlay
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.LoopInTheme
 import com.loopin.app.ui.theme.PureWhite
 
@@ -299,7 +295,9 @@ private fun PlanRowCard(
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Dual Overlapping Devices Screen Icon (Exact matching mockup)
-        OverlappingScreensIcon(
+        Icon(
+            painter = painterResource(FluentIcons.MySubs),
+            contentDescription = null,
             tint = DeepMidnight,
             modifier = Modifier.size(24.dp)
         )
@@ -347,7 +345,7 @@ private fun PlanRowCard(
 
         // Trailing Chevron
         Icon(
-            imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+            painter = painterResource(FluentIcons.ChevronRight),
             contentDescription = null,
             tint = Color(0xFF9CA3AF),
             modifier = Modifier.size(20.dp)
@@ -392,12 +390,10 @@ private fun ServicePlansHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
+                    painter = painterResource(FluentIcons.Back),
                     contentDescription = "Back",
                     tint = DeepMidnight,
-                    modifier = Modifier
-                        .size(16.dp)
-                        .padding(start = 2.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -442,7 +438,7 @@ private fun ServicePlansHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.MoreVert,
+                    painter = painterResource(FluentIcons.MoreVertical),
                     contentDescription = "More options",
                     tint = DeepMidnight,
                     modifier = Modifier.size(22.dp)
@@ -470,7 +466,7 @@ private fun ServicePlansHeader(
                     },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Outlined.Flag,
+                            painter = painterResource(FluentIcons.Flag),
                             contentDescription = null,
                             tint = DeepMidnight,
                             modifier = Modifier.size(18.dp)

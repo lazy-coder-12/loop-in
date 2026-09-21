@@ -21,10 +21,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBackIos
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -46,6 +42,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import com.loopin.app.ui.theme.FluentIcons
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -237,9 +235,10 @@ fun NewSubscriptionScreen(
                             color = DeepMidnight
                         )
                         Icon(
-                            imageVector = Icons.Filled.ArrowDropDown,
+                            painter = painterResource(FluentIcons.ChevronDown),
                             contentDescription = "Dropdown",
-                            tint = DeepMidnight
+                            tint = DeepMidnight,
+                            modifier = Modifier.size(20.dp)
                         )
                     }
 
@@ -346,9 +345,10 @@ fun NewSubscriptionScreen(
                             color = DeepMidnight
                         )
                         Icon(
-                            imageVector = Icons.Filled.ArrowDropDown,
+                            painter = painterResource(FluentIcons.ChevronDown),
                             contentDescription = "Dropdown",
-                            tint = DeepMidnight
+                            tint = DeepMidnight,
+                            modifier = Modifier.size(20.dp)
                         )
                     }
 
@@ -513,12 +513,10 @@ private fun NewSubscriptionHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
+                    painter = painterResource(FluentIcons.Back),
                     contentDescription = "Back",
                     tint = DeepMidnight,
-                    modifier = Modifier
-                        .size(18.dp)
-                        .padding(start = 4.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -570,7 +568,7 @@ private fun NewSubscriptionHeader(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.Close,
+                        painter = painterResource(FluentIcons.Dismiss),
                         contentDescription = "Close",
                         tint = PureWhite,
                         modifier = Modifier.size(13.dp)

@@ -21,14 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBackIos
-import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.outlined.CardGiftcard
-import androidx.compose.material.icons.outlined.InsertChartOutlined
-import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.rounded.Edit
+import androidx.annotation.DrawableRes
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -50,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -66,6 +58,7 @@ import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DangerRed
 import com.loopin.app.ui.theme.DeepMidnight
 import com.loopin.app.ui.theme.ElectricBlue
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.LoopInTheme
 import com.loopin.app.ui.theme.NeutralGray
 import com.loopin.app.ui.theme.PureWhite
@@ -198,7 +191,7 @@ fun ProfileContent(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.Edit,
+                        painter = painterResource(FluentIcons.Edit),
                         contentDescription = "Edit Profile",
                         tint = DeepMidnight,
                         modifier = Modifier.size(18.dp)
@@ -218,7 +211,7 @@ fun ProfileContent(
                 // Primary Menu Items with Leading Icons:
                 // 1. Settings
                 ProfileMenuItemWithIcon(
-                    icon = Icons.Outlined.Settings,
+                    iconRes = FluentIcons.Settings,
                     title = "Settings",
                     subtitle = "Account Settings",
                     onClick = { showDataDialog = true }
@@ -228,7 +221,7 @@ fun ProfileContent(
 
                 // 2. Analytics
                 ProfileMenuItemWithIcon(
-                    icon = Icons.Outlined.InsertChartOutlined,
+                    iconRes = FluentIcons.Trending,
                     title = "Analytics",
                     subtitle = "View expenses and breakdown",
                     onClick = {
@@ -242,7 +235,7 @@ fun ProfileContent(
 
                 // 3. Invite Friends
                 ProfileMenuItemWithIcon(
-                    icon = Icons.Outlined.CardGiftcard,
+                    iconRes = FluentIcons.Gift,
                     title = "Invite Friends",
                     subtitle = "Share your invite link with friends",
                     onClick = {
@@ -369,7 +362,7 @@ fun ProfileContent(
 
 @Composable
 private fun ProfileMenuItemWithIcon(
-    icon: ImageVector,
+    @DrawableRes iconRes: Int,
     title: String,
     subtitle: String,
     onClick: () -> Unit,
@@ -383,7 +376,7 @@ private fun ProfileMenuItemWithIcon(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = icon,
+            painter = painterResource(iconRes),
             contentDescription = title,
             tint = DeepMidnight,
             modifier = Modifier.size(26.dp)
@@ -409,10 +402,10 @@ private fun ProfileMenuItemWithIcon(
         }
 
         Icon(
-            imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+            painter = painterResource(FluentIcons.ChevronRight),
             contentDescription = null,
             tint = Color(0xFF9CA3AF),
-            modifier = Modifier.size(22.dp)
+            modifier = Modifier.size(20.dp)
         )
     }
 }
@@ -439,7 +432,7 @@ private fun ProfileTextMenuItem(
             color = DeepMidnight
         )
         Icon(
-            imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+            painter = painterResource(FluentIcons.ChevronRight),
             contentDescription = null,
             tint = Color(0xFF9CA3AF),
             modifier = Modifier.size(20.dp)
@@ -477,12 +470,10 @@ private fun ProfileHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
+                    painter = painterResource(FluentIcons.Back),
                     contentDescription = "Back",
                     tint = DeepMidnight,
-                    modifier = Modifier
-                        .size(18.dp)
-                        .padding(start = 4.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -531,7 +522,7 @@ private fun ProfileHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Notifications,
+                    painter = painterResource(FluentIcons.Alert),
                     contentDescription = "Notifications",
                     tint = DeepMidnight,
                     modifier = Modifier.size(22.dp)

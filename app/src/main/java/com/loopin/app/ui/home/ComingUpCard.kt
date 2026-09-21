@@ -19,9 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.EventAvailable
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -31,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +40,7 @@ import com.loopin.app.ui.components.MonogramTile
 import com.loopin.app.ui.theme.AccentGreen
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.PureWhite
 
 @Composable
@@ -78,7 +77,7 @@ fun ComingUpCard(
                     modifier = Modifier.weight(1f)
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.EventAvailable,
+                        painter = painterResource(FluentIcons.Calendar),
                         contentDescription = "Renewals Calendar",
                         tint = PureWhite,
                         modifier = Modifier.size(20.dp)
@@ -112,11 +111,11 @@ fun ComingUpCard(
                 }
 
                 Icon(
-                    imageVector = Icons.Rounded.KeyboardArrowDown,
+                    painter = painterResource(FluentIcons.ChevronDown),
                     contentDescription = if (isExpanded) "Collapse" else "Expand",
                     tint = PureWhite,
                     modifier = Modifier
-                        .size(22.dp)
+                        .size(20.dp)
                         .rotate(rotationAngle)
                 )
             }

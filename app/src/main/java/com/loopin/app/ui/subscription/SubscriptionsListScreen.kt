@@ -25,11 +25,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBackIos
-import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -47,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.loopin.app.ui.theme.FluentIcons
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -417,12 +413,10 @@ private fun MySubsHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBackIos,
+                    painter = painterResource(FluentIcons.Back),
                     contentDescription = "Back",
                     tint = DeepMidnight,
-                    modifier = Modifier
-                        .size(18.dp)
-                        .padding(start = 4.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -471,7 +465,7 @@ private fun MySubsHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Notifications,
+                    painter = painterResource(FluentIcons.Alert),
                     contentDescription = "Notifications",
                     tint = DeepMidnight,
                     modifier = Modifier.size(22.dp)
@@ -507,10 +501,10 @@ private fun MySubsSearchBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = Icons.Rounded.Search,
+                painter = painterResource(FluentIcons.Search),
                 contentDescription = "Search",
                 tint = Color(0xFF9CA3AF),
-                modifier = Modifier.size(22.dp)
+                modifier = Modifier.size(20.dp)
             )
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -552,7 +546,7 @@ private fun MySubsSearchBar(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.Close,
+                        painter = painterResource(FluentIcons.Dismiss),
                         contentDescription = "Clear search",
                         tint = NeutralGray,
                         modifier = Modifier.size(18.dp)

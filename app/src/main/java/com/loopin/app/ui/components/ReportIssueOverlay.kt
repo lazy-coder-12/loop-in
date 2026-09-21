@@ -28,9 +28,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -51,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -60,6 +58,7 @@ import androidx.compose.ui.unit.sp
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
 import com.loopin.app.ui.theme.ElectricBlue
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.LoopInTheme
 import com.loopin.app.ui.theme.NeutralGray
 import com.loopin.app.ui.theme.PureWhite
@@ -189,7 +188,7 @@ fun ReportIssueOverlay(
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Icon(
-                                        imageVector = Icons.Rounded.Close,
+                                        painter = painterResource(FluentIcons.Dismiss),
                                         contentDescription = "Close",
                                         tint = PureWhite,
                                         modifier = Modifier.size(12.dp)
@@ -301,7 +300,7 @@ fun ReportIssueOverlay(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = Icons.Rounded.Check,
+                            painter = painterResource(FluentIcons.Checkmark),
                             contentDescription = "Success",
                             tint = Color(0xFF16A34A),
                             modifier = Modifier.size(36.dp)

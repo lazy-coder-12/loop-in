@@ -23,11 +23,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.EditNote
-import androidx.compose.material.icons.rounded.Memory
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
 import com.loopin.app.ui.theme.ElectricBlue
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.LoopInTheme
 import com.loopin.app.ui.theme.PureWhite
 import kotlinx.coroutines.launch
@@ -198,7 +195,7 @@ fun AddSubscriptionOverlay(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
-                                    imageVector = Icons.Rounded.Close,
+                                    painter = painterResource(FluentIcons.Dismiss),
                                     contentDescription = "Close",
                                     tint = PureWhite,
                                     modifier = Modifier.size(12.dp)
@@ -238,7 +235,7 @@ fun AddSubscriptionOverlay(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = Icons.Rounded.Memory,
+                            painter = painterResource(FluentIcons.Sparkle),
                             contentDescription = "Auto Detect",
                             tint = ElectricBlue,
                             modifier = Modifier.size(28.dp)
@@ -268,10 +265,10 @@ fun AddSubscriptionOverlay(
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Icon(
-                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+                        painter = painterResource(FluentIcons.ChevronRight),
                         contentDescription = null,
                         tint = Color(0xFF9CA3AF),
-                        modifier = Modifier.size(22.dp)
+                        modifier = Modifier.size(20.dp)
                     )
                 }
 
@@ -302,10 +299,10 @@ fun AddSubscriptionOverlay(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = Icons.Rounded.EditNote,
+                            painter = painterResource(FluentIcons.DocumentEdit),
                             contentDescription = "Manual Entry",
                             tint = ElectricBlue,
-                            modifier = Modifier.size(30.dp)
+                            modifier = Modifier.size(28.dp)
                         )
                     }
 
@@ -332,10 +329,10 @@ fun AddSubscriptionOverlay(
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Icon(
-                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+                        painter = painterResource(FluentIcons.ChevronRight),
                         contentDescription = null,
                         tint = Color(0xFF9CA3AF),
-                        modifier = Modifier.size(22.dp)
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

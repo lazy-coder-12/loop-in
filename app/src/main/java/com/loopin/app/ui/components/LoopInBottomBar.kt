@@ -12,12 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AddCircleOutline
-import androidx.compose.material.icons.rounded.FindInPage
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Layers
-import androidx.compose.material.icons.rounded.PersonOutline
+import androidx.annotation.DrawableRes
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -25,25 +20,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.BorderLight
 import com.loopin.app.ui.theme.ElectricBlue
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.NeutralGray
 import com.loopin.app.ui.theme.PureWhite
 
 enum class LoopInTab(
     val title: String,
-    val icon: ImageVector
+    @DrawableRes val iconRes: Int,
+    @DrawableRes val selectedIconRes: Int = iconRes
 ) {
-    HOME("Home", Icons.Rounded.Home),
-    DISCOVER("Discover", Icons.Rounded.FindInPage),
-    NEW("New", Icons.Rounded.AddCircleOutline),
-    MY_SUBS("My Subs", Icons.Rounded.Layers),
-    PROFILE("Profile", Icons.Rounded.PersonOutline)
+    HOME("Home", FluentIcons.Home, FluentIcons.HomeFilled),
+    DISCOVER("Discover", FluentIcons.Discover, FluentIcons.DiscoverFilled),
+    NEW("New", FluentIcons.New, FluentIcons.NewFilled),
+    MY_SUBS("My Subs", FluentIcons.MySubs, FluentIcons.MySubsFilled),
+    PROFILE("Profile", FluentIcons.Profile, FluentIcons.ProfileFilled)
 }
 
 @Composable
@@ -85,7 +82,7 @@ fun LoopInBottomBar(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Icon(
-                        imageVector = tab.icon,
+                        painter = painterResource(id = if (isSelected) tab.selectedIconRes else tab.iconRes),
                         contentDescription = tab.title,
                         tint = itemColor,
                         modifier = Modifier.size(24.dp)

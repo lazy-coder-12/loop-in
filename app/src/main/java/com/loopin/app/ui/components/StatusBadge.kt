@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.Search
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,13 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.loopin.app.ui.theme.FluentIcons
 import com.loopin.app.ui.theme.LoopInTheme
 
 enum class BadgeStatusType {
@@ -48,29 +52,29 @@ fun StatusBadge(
     val colors = LoopInTheme.colors
     val shapes = LoopInTheme.shapes
 
-    val (containerColor, contentColor, icon, defaultLabel) = when (status) {
+    val (containerColor, contentColor, iconRes, defaultLabel) = when (status) {
         BadgeStatusType.REVIEW -> Quad(
             colors.warningContainer,
             colors.warningContent,
-            Icons.Default.Search,
+            FluentIcons.Search,
             "Review"
         )
         BadgeStatusType.ACTIVE -> Quad(
             colors.successContainer,
             colors.successContent,
-            Icons.Default.Check,
+            FluentIcons.Checkmark,
             "Active"
         )
         BadgeStatusType.PAUSED -> Quad(
             colors.infoContainer,
             colors.infoContent,
-            Icons.Default.Pause,
+            FluentIcons.Pause,
             "Paused"
         )
         BadgeStatusType.ENDED -> Quad(
             colors.surfaceVariant,
             colors.failed,
-            Icons.Default.Close,
+            FluentIcons.Dismiss,
             "Ended"
         )
     }
@@ -93,7 +97,7 @@ fun StatusBadge(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = icon,
+            painter = painterResource(iconRes),
             contentDescription = null,
             tint = contentColor,
             modifier = Modifier.size(11.dp)
