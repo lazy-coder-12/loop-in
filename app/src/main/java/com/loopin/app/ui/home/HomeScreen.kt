@@ -107,7 +107,7 @@ fun HomeScreenContent(
                     .background(ElectricBlue)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.bg_hero_blue),
+                    painter = painterResource(id = R.drawable.bg_hero_orange),
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,
                     alignment = Alignment.TopCenter,

@@ -23,6 +23,10 @@ class SubscriptionRepositoryImpl(
         }
     }
 
+    override suspend fun getSubscriptionByName(name: String): Subscription? {
+        return subscriptionDao.getSubscriptionByName(name)?.toDomainModel()
+    }
+
     override suspend fun insertSubscription(subscription: Subscription): Long {
         return subscriptionDao.insert(subscription.toEntity())
     }

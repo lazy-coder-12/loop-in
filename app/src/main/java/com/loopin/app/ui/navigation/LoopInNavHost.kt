@@ -34,6 +34,12 @@ import com.loopin.app.ui.home.HomeScreen
 import com.loopin.app.ui.home.HomeViewModel
 import com.loopin.app.ui.notifications.NotificationsScreen
 import com.loopin.app.ui.settings.ProfileScreen
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
+import com.loopin.app.detection.model.ParsedDebitAlert
+import com.loopin.app.detection.ui.AutoDetectSheet
+import com.loopin.app.detection.ui.DetectionConfirmationSheet
+import kotlinx.coroutines.launch
 import com.loopin.app.ui.subscription.NewSubscriptionScreen
 import com.loopin.app.ui.subscription.SubscriptionDetailScreen
 import com.loopin.app.ui.subscription.SubscriptionsListScreen
@@ -55,7 +61,12 @@ fun LoopInNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
+    val coroutineScope = rememberCoroutineScope()
+    val detectionManager = appContainer.detectionManager
+    val activeAlert by detectionManager.activeAlertForConfirmation.collectAsState()
     var showAddSubscriptionOverlay by remember { mutableStateOf(false) }
+    var showAutoDetectSheet by remember { mutableStateOf(false) }
+    var editingDetectedAlert by remember { mutableStateOf<ParsedDebitAlert?>(null) }
 
     fun navigateToNewSubscriptionDirectly() {
         navController.navigate(NavRoutes.NewSubscription.route) {
@@ -192,11 +203,23 @@ fun LoopInNavHost(
             }
 
             composable(NavRoutes.NewSubscription.route) {
+                val detected = editingDetectedAlert
                 NewSubscriptionScreen(
                     repository = appContainer.subscriptionRepository,
-                    onBackClick = { handleBackClick() },
-                    onCancelClick = { handleBackClick() },
+                    initialName = detected?.matchedServiceName ?: "",
+                    initialCategory = detected?.category ?: "Entertainment",
+                    initialAmountMinor = detected?.amountMinor,
+                    initialDueDate = detected?.debitDate,
+                    onBackClick = {
+                        editingDetectedAlert = null
+                        handleBackClick()
+                    },
+                    onCancelClick = {
+                        editingDetectedAlert = null
+                        handleBackClick()
+                    },
                     onSaveSuccess = {
+                        editingDetectedAlert = null
                         navigateToTab(LoopInTab.MY_SUBS)
                     },
                     onTabSelected = ::navigateToTab
@@ -423,10 +446,42 @@ fun LoopInNavHost(
                 },
                 onManualEntry = {
                     showAddSubscriptionOverlay = false
+                    editingDetectedAlert = null
                     navigateToNewSubscriptionDirectly()
                 },
                 onAutoDetect = {
                     showAddSubscriptionOverlay = false
+                    showAutoDetectSheet = true
+                }
+            )
+        }
+
+        // RBI Pre-Debit Detection & Simulation Sheet
+        if (showAutoDetectSheet) {
+            AutoDetectSheet(
+                detectionManager = detectionManager,
+                onDismiss = {
+                    showAutoDetectSheet = false
+                }
+            )
+        }
+
+        // Detection Confirmation Sheet (Triggered live or via simulation)
+        activeAlert?.let { alert ->
+            DetectionConfirmationSheet(
+                alert = alert,
+                onConfirm = {
+                    coroutineScope.launch {
+                        detectionManager.confirmAlertAndBuildSubscription(alert)
+                    }
+                },
+                onEdit = {
+                    editingDetectedAlert = alert
+                    detectionManager.dismissActiveAlert()
+                    navigateToNewSubscriptionDirectly()
+                },
+                onDismiss = {
+                    detectionManager.dismissActiveAlert()
                 }
             )
         }

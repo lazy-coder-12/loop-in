@@ -54,6 +54,7 @@ import com.loopin.app.domain.model.Subscription
 import com.loopin.app.domain.model.SubscriptionSource
 import com.loopin.app.domain.model.SubscriptionStatus
 import com.loopin.app.ui.components.LoopInBottomBar
+import com.loopin.app.ui.components.LoopInPrimaryButton
 import com.loopin.app.ui.components.LoopInTab
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
@@ -68,14 +69,18 @@ import java.time.LocalDate
 fun NewSubscriptionScreen(
     modifier: Modifier = Modifier,
     repository: SubscriptionRepository? = null,
+    initialName: String = "",
+    initialCategory: String = "Entertainment",
+    initialAmountMinor: Long? = null,
+    initialDueDate: LocalDate? = null,
     onBackClick: () -> Unit = {},
     onCancelClick: () -> Unit = onBackClick,
     onSaveSuccess: () -> Unit = {},
     onTabSelected: (LoopInTab) -> Unit = {}
 ) {
     val coroutineScope = rememberCoroutineScope()
-    var subscriptionName by remember { mutableStateOf("") }
-    var selectedCategory by remember { mutableStateOf("Entertainment") }
+    var subscriptionName by remember(initialName) { mutableStateOf(initialName) }
+    var selectedCategory by remember(initialCategory) { mutableStateOf(initialCategory) }
     var isCategoryDropdownOpen by remember { mutableStateOf(false) }
 
     var selectedBillingCycle by remember { mutableStateOf("Monthly") }
@@ -119,15 +124,19 @@ fun NewSubscriptionScreen(
             else -> BillingCycle.MONTHLY
         }
 
+        val finalAmountMinor = initialAmountMinor ?: amountMinor
+        val nextDue = initialDueDate ?: LocalDate.now().plusMonths(1)
+        val finalSource = if (initialName.isNotBlank()) SubscriptionSource.AUTO else SubscriptionSource.MANUAL
+
         if (repository != null) {
             coroutineScope.launch {
                 val newSub = Subscription(
                     name = finalName,
-                    amountMinor = amountMinor,
+                    amountMinor = finalAmountMinor,
                     billingCycle = cycleEnum,
-                    nextDueDate = LocalDate.now().plusMonths(1),
+                    nextDueDate = nextDue,
                     status = SubscriptionStatus.ACTIVE,
-                    source = SubscriptionSource.MANUAL,
+                    source = finalSource,
                     category = selectedCategory,
                     createdAt = System.currentTimeMillis()
                 )
@@ -433,23 +442,20 @@ fun NewSubscriptionScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // "Add Subscription" Action Button
-                Button(
+                // "Add Subscription" Action Button (Linear gradient #3D3C3B to #16110F with #FFFFFF text)
+                LoopInPrimaryButton(
                     onClick = { handleSave() },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = ElectricBlue,
-                        contentColor = PureWhite
-                    )
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(
                         text = "Add Subscription",
                         fontFamily = AppFontFamily,
                         fontWeight = FontWeight.SemiBold,
-                        fontSize = 15.sp
+                        fontSize = 15.sp,
+                        color = PureWhite
                     )
                 }
 

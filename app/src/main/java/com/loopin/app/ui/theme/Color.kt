@@ -6,20 +6,29 @@ import androidx.compose.ui.graphics.Color
 
 // ============================================================================
 // Loop'in Brand Palette
-// Primary: #0070FF (Electric Blue)
-// Midnight: #050D26 (Deep Midnight Black/Blue)
+// Primary / Accent: #E95810 (Brand Orange)
+// Midnight: #16110F (Deep Warm Charcoal)
+// Primary Button Gradient: #3D3C3B to #16110F
 // Neutral Gray: #767676
 // Border: #E6E6E6
 // Pure White: #FFFFFF
 // Surface Light: #F0F0F0
 // ============================================================================
 
-val ElectricBlue = Color(0xFF0070FF)
-val DeepMidnight = Color(0xFF050D26)
+val ElectricBlue = Color(0xFFE95810) // Updated from #0070FF to #E95810
+val BrandOrange = ElectricBlue
+val DeepMidnight = Color(0xFF16110F) // Updated from #050D26 to #16110F
 val NeutralGray = Color(0xFF767676)
 val BorderLight = Color(0xFFE6E6E6)
 val PureWhite = Color(0xFFFFFFFF)
 val SurfaceLight = Color(0xFFF0F0F0)
+
+// Primary Button Linear Gradient: #3D3C3B to #16110F
+val ButtonGradientStart = Color(0xFF3D3C3B)
+val ButtonGradientEnd = Color(0xFF16110F)
+val PrimaryButtonGradient = androidx.compose.ui.graphics.Brush.linearGradient(
+    colors = listOf(ButtonGradientStart, ButtonGradientEnd)
+)
 
 // Supporting accents
 val AccentGreen = Color(0xFF00E676)

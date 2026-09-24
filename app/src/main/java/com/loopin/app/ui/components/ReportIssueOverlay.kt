@@ -260,26 +260,21 @@ fun ReportIssueOverlay(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Submit Button
-                    Button(
+                    // Submit Button (Linear gradient #3D3C3B to #16110F with #FFFFFF text)
+                    LoopInPrimaryButton(
                         onClick = { isSubmitted = true },
                         enabled = isSubmitEnabled,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = ElectricBlue,
-                            disabledContainerColor = Color(0xFFE5E7EB),
-                            contentColor = PureWhite,
-                            disabledContentColor = Color(0xFF9CA3AF)
-                        )
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
                             text = "Submit",
                             fontFamily = AppFontFamily,
                             fontWeight = FontWeight.SemiBold,
-                            fontSize = 15.sp
+                            fontSize = 15.sp,
+                            color = if (isSubmitEnabled) PureWhite else Color(0xFF9CA3AF)
                         )
                     }
                 }
@@ -330,22 +325,19 @@ fun ReportIssueOverlay(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    Button(
+                    LoopInPrimaryButton(
                         onClick = { handleDismiss() },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(50.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = ElectricBlue,
-                            contentColor = PureWhite
-                        )
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
                             text = "Done",
                             fontFamily = AppFontFamily,
                             fontWeight = FontWeight.SemiBold,
-                            fontSize = 15.sp
+                            fontSize = 15.sp,
+                            color = PureWhite
                         )
                     }
                 }

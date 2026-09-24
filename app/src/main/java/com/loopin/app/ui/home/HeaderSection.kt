@@ -131,7 +131,7 @@ private fun HeaderActionButton(
             modifier = Modifier
                 .size(44.dp)
                 .clip(CircleShape)
-                .background(Color(0x33050D26)), // Translucent dark midnight circle
+                .background(Color(0x3316110F)), // Translucent dark charcoal circle
             contentAlignment = Alignment.Center
         ) {
             Icon(

@@ -33,6 +33,9 @@ class FakeSubscriptionRepository : SubscriptionRepository {
     override fun getSubscriptionById(id: Long): Flow<Subscription?> =
         _flow.map { list -> list.find { it.id == id } }
 
+    override suspend fun getSubscriptionByName(name: String): Subscription? =
+        _flow.value.find { it.name.equals(name, ignoreCase = true) }
+
     override suspend fun insertSubscription(subscription: Subscription): Long {
         _flow.value = _flow.value + subscription
         return subscription.id

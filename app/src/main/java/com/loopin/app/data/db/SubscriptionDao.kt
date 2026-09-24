@@ -15,6 +15,9 @@ interface SubscriptionDao {
     @Query("SELECT * FROM subscriptions WHERE id = :id LIMIT 1")
     fun getSubscriptionByIdFlow(id: Long): Flow<SubscriptionEntity?>
 
+    @Query("SELECT * FROM subscriptions WHERE LOWER(name) = LOWER(:name) LIMIT 1")
+    suspend fun getSubscriptionByName(name: String): SubscriptionEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(subscriptions: List<SubscriptionEntity>)
 

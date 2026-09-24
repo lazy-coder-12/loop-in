@@ -8,7 +8,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 
 // ============================================================================
 // Loop'in Brand Theme
-// Electric Blue (#0070FF), Deep Midnight (#050D26), Inter Tight Typography
+// Brand Orange (#E95810), Deep Charcoal (#16110F), Inter Tight Typography
 // ============================================================================
 
 private val LightColorScheme = lightColorScheme(

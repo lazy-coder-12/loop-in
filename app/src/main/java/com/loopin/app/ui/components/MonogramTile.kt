@@ -50,11 +50,11 @@ fun MonogramTile(
 
     // Curated pastel palettes echoing the exact reference design (Hotstar Blue, Netflix Salmon, Spotify Mint)
     val colorPairs = listOf(
-        Color(0xFFA5C9FF) to Color(0xFF050D26), // Hotstar blue
-        Color(0xFFFFA6A6) to Color(0xFF050D26), // Netflix coral
-        Color(0xFFBEE8B7) to Color(0xFF050D26), // Spotify mint
-        Color(0xFFE5D4FF) to Color(0xFF050D26), // Purple
-        Color(0xFFFFDFB0) to Color(0xFF050D26)  // Amber
+        Color(0xFFA5C9FF) to Color(0xFF16110F), // Hotstar blue
+        Color(0xFFFFA6A6) to Color(0xFF16110F), // Netflix coral
+        Color(0xFFBEE8B7) to Color(0xFF16110F), // Spotify mint
+        Color(0xFFE5D4FF) to Color(0xFF16110F), // Purple
+        Color(0xFFFFDFB0) to Color(0xFF16110F)  // Amber
     )
 
     val selectedPair = when {

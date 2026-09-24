@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.loopin.app.ui.components.LoopInPrimaryButton
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DeepMidnight
 import com.loopin.app.ui.theme.ElectricBlue
@@ -88,28 +89,26 @@ fun EmptyHomeState(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Add subscription button
-        Button(
+        // Add subscription button (Linear gradient #3D3C3B to #16110F with #FFFFFF text)
+        LoopInPrimaryButton(
             onClick = onAddSubscriptionClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
-            shape = RoundedCornerShape(14.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = ElectricBlue,
-                contentColor = PureWhite
-            )
+            shape = RoundedCornerShape(14.dp)
         ) {
             Icon(
                 painter = painterResource(FluentIcons.Add),
                 contentDescription = null,
+                tint = PureWhite,
                 modifier = Modifier.size(18.dp)
             )
             Text(
                 text = "  Add Subscription",
                 fontFamily = AppFontFamily,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                color = PureWhite
             )
         }
 

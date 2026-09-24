@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.sp
 import com.loopin.app.R
 import com.loopin.app.data.repository.SubscriptionRepository
 import com.loopin.app.ui.components.LoopInBottomBar
+import com.loopin.app.ui.components.LoopInPrimaryButton
 import com.loopin.app.ui.components.LoopInTab
 import com.loopin.app.ui.theme.AppFontFamily
 import com.loopin.app.ui.theme.DangerRed
@@ -324,16 +325,20 @@ fun ProfileContent(
                         color = NeutralGray
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Button(
+                    LoopInPrimaryButton(
                         onClick = {
                             onSeedSampleData()
                             showDataDialog = false
                         },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = ElectricBlue)
+                        shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Seed Sample Subscriptions", fontFamily = AppFontFamily, fontWeight = FontWeight.SemiBold)
+                        Text(
+                            "Seed Sample Subscriptions",
+                            fontFamily = AppFontFamily,
+                            fontWeight = FontWeight.SemiBold,
+                            color = PureWhite
+                        )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     OutlinedButton(

@@ -91,9 +91,10 @@ The Loop'in Design System is built for modern Android with high tactile feedback
 ### Brand Palette
 | Color Name | Hex Code | Preview | Purpose |
 |---|---|---|---|
-| **Electric Blue** | `#0070FF` | ![#0070FF](https://via.placeholder.com/15/0070FF/0070FF.png) | Primary accent, CTA buttons, active tabs, brand headers |
-| **Deep Midnight** | `#050D26` | ![#050D26](https://via.placeholder.com/15/050D26/050D26.png) | Primary typography, headers, dark navy card containers |
-| **Pure White** | `#FFFFFF` | ![#FFFFFF](https://via.placeholder.com/15/FFFFFF/FFFFFF.png) | Surface container, content sheets, crisp contrast |
+| **Brand Orange** | `#E95810` | ![#E95810](https://via.placeholder.com/15/E95810/E95810.png) | Primary brand accent, active tabs, brand headers, links |
+| **Deep Charcoal** | `#16110F` | ![#16110F](https://via.placeholder.com/15/16110F/16110F.png) | Primary typography, headers, dark charcoal card containers |
+| **Primary Button Gradient** | `#3D3C3B` to `#16110F` | — | Primary action buttons with linear gradient and `#FFFFFF` text |
+| **Pure White** | `#FFFFFF` | ![#FFFFFF](https://via.placeholder.com/15/FFFFFF/FFFFFF.png) | Surface container, content sheets, button text, crisp contrast |
 | **Neutral Gray** | `#767676` | ![#767676](https://via.placeholder.com/15/767676/767676.png) | Subtitles, inactive tabs, secondary descriptions |
 | **Accent Green** | `#2E7D32` | ![#2E7D32](https://via.placeholder.com/15/2E7D32/2E7D32.png) | Active status pills, safe renewal badges |
 | **Warning Orange**| `#F57C00` | ![#F57C00](https://via.placeholder.com/15/F57C00/F57C00.png) | Plan count indicator diamonds, upcoming renewal warnings |
